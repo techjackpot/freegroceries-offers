@@ -1,0 +1,109 @@
+.header {
+	padding: 1em 0;
+	border-top: solid 8px #0e6f39;
+}
+.header .logo {
+	display: inline-block;
+	margin-left: 5%;
+}
+@media only screen and (max-width: 980px) {
+	.header {
+		text-align: center;
+	}
+	.header .logo {
+	    float: none;
+	    margin: 0 auto;
+	}
+}
+.banner {
+	background: url(../../assets/images/banner-bg.jpg) no-repeat center center;
+	background-size: cover;
+	color: #fff;
+	padding: 35px 0 50px;
+	box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.05) inset, 0 -150px 180px rgba(0, 0, 0, 0.77) inset;
+}
+.banner h1 {
+	font-size: 64px;
+	text-transform: uppercase;
+}
+.banner h3 {
+	font-size: 27px;
+	line-height: 1.63;
+}
+.footer {
+    overflow: hidden;
+    background: #043e22;
+    width: 100%;
+}
+.footer-holder {
+    max-width: 850px;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+    font-size: 13px;
+    line-height: 18px;
+    padding: 64px 0 43px;
+    color: #8ca595;
+}
+.footer ul li {
+    display: inline-block;
+    padding: 0 4px;
+    vertical-align: top;
+}
+.footer ul {
+    margin: 0;
+    padding: 0 0 3px;
+    display: inline-block;
+    vertical-align: top;
+    list-style: none;
+}
+.footer ul li:before {
+	content: ' | ';
+	padding: 0 4px 0 0;
+	display: inline;
+}
+.footer ul li:first-child:before {
+	content: '';
+}
+.footer ul li a {
+    color: #8ca595;
+}
+
+.offers-list {
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
+.offer-item {
+	margin: 15px;
+	padding: 1em;
+	border:solid 1px #eee;
+	transition: all 0.5s ease;
+}
+.offer-image img {
+	width: 100%;
+	max-width:220px;
+}
+a.btn_offer {
+	text-transform: uppercase;
+	font-size: 18px;
+	font-weight: bold;
+	border-radius: 0.5em;
+	padding: 0.5em 1em;
+	background: #e40;
+	color: #fff;
+	margin: 15px 0 0;
+	box-shadow: 0 6px 8px #ff0;
+	text-decoration: none;
+	display: inline-block;
+	border: solid 1px transparent;
+	transition: all 0.2s ease;
+}
+a.btn_offer:hover {
+	background: #eee;
+	color: #333;
+	border-color: #777;
+}
+a.btn_yes:hover {
+	background: #3a3;
+	color: #ddd;
+}
