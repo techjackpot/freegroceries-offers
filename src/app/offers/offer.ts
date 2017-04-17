@@ -18,5 +18,6 @@ export class Offer {
   		cond: string;
   		val: number;
   	}
-  }
+  };
+  passed: boolean;
 }

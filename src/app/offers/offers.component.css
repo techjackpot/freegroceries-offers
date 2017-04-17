@@ -77,12 +77,13 @@
 	margin: 15px;
 	padding: 1em;
 	border:solid 1px #eee;
+	transition: all 0.5s ease;
 }
 .offer-image img {
 	width: 100%;
 	max-width:220px;
 }
-.offer-action a {
+a.btn_offer {
 	text-transform: uppercase;
 	font-size: 18px;
 	font-weight: bold;
@@ -94,4 +95,15 @@
 	box-shadow: 0 6px 8px #ff0;
 	text-decoration: none;
 	display: inline-block;
+	border: solid 1px transparent;
+	transition: all 0.2s ease;
+}
+a.btn_offer:hover {
+	background: #eee;
+	color: #333;
+	border-color: #777;
+}
+a.btn_yes:hover {
+	background: #3a3;
+	color: #ddd;
 }

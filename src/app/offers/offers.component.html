@@ -18,7 +18,7 @@
 </div>
 <div class="container offers-list">
 	<div class="row" *ngIf="isDataAvailable">
-		<div *ngFor="let offer of offers" class="col-lg-12 offer-item">
+		<div *ngFor="let offer of offers" class="col-lg-12 offer-item" [hidden]="offer.passed">
 			<div class="col-lg-3 text-center offer-image">
 				<img src={{offer.img_url}} />
 			</div>
@@ -26,9 +26,10 @@
 				{{offer.description}}
 			</div>
 			<div class="col-lg-2 text-center offer-action">
-				<a href="">Yes</a> <a href="javascript:void(0)" (click)="onClickNo()">No</a>
+				<a href="javascript:void(0)" class="btn_yes btn_offer" (click)="onClickYes(offer)">Yes</a> <a href="javascript:void(0)" class="btn_no btn_offer" (click)="onClickNo(offer)">No</a>
 			</div>
 		</div>
+		<div *ngIf="showNextButton" class="next-area col-lg-12 text-center"><a class="btn_next btn_offer" herf="/success">Next</a></div>
 	</div>
 	<div class="row" *ngIf="!isDataAvailable">
 		<h2>No offers available.</h2>
