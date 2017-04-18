@@ -48,7 +48,7 @@ export class OffersService {
       				})
       				.catch(this.handleError);*/
 		var $http = new XMLHttpRequest();
-		var $url = "http://localhost/postform.php";
+		var $url = "http://ec2-54-186-127-51.us-west-2.compute.amazonaws.com:8080/postform.php";
 		var $params = this.jsonToQueryString(data);//"lorem=ipsum&name=binny";
 		$http.open("POST", $url, false);
 
