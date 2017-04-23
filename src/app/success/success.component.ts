@@ -9,7 +9,10 @@ export class SuccessComponent implements OnInit {
 
   constructor() { }
 
+  fname : string = '';
+
   ngOnInit() {
+  	this.fname = window.localStorage.getItem('fname');
   }
 
 }

@@ -63,6 +63,9 @@ export class OffersComponent implements OnInit {
 
 	checkNextButton() {
 		if(this.passedOfferCount == this.offers.length) {
+	        let fullName = this.queryParams['name'];
+	        let firstName = fullName.split(' ').slice(0, -1).join(' ');
+			window.localStorage.setItem('fname',firstName);
 			this.showNextButton = true;
 		}
 	}
