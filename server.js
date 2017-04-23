@@ -1,12 +1,18 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var path = require("path");
 
 var app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
 // Create link to Angular build directory
-var distDir = __dirname + "/dist/";
-app.use(express.static(distDir));
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Catch all other routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 
 
 // Initialize the app.
