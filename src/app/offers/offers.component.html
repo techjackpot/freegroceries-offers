@@ -20,6 +20,36 @@
 			</div>
 			<div class="col-lg-7">
 				{{offer.description}}
+				<div *ngIf="offer.new_cfields.length>0">
+					<hr />
+					<div *ngFor="let cfield of offer.new_cfields; let i = index;" class="panel panel-info">
+						<div class="panel-heading">
+							{{i+1}}. {{cfield.description}}
+						</div>
+						<div class="panel-body">
+							<div *ngIf="cfield.type=='radio'" class="radio">
+					            <label *ngFor="let val of cfield.values" class="radio-inline">
+									<input type="radio" [(ngModel)]="cfield.selectedValue" [value]="val.value" />
+									{{val.value}}
+					            </label>
+							</div>
+
+							<div *ngIf="cfield.type=='checkbox'" class="checkbox">
+								<label *ngFor="let val of cfield.values" class="checkbox-inline">
+									<input type="checkbox" name="{{cfield.key}}[]" [value]="val.value" />
+									{{val.value}}
+								</label>
+							</div>
+
+							<div *ngIf="cfield.type=='select'">
+								<select class="form-control" [(ngModel)]="cfield.selectedValue">
+									<option></option>
+									<option *ngFor="let val of cfield.values" [value]="val.value">{{val.value}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="col-lg-2 text-center offer-action">
 				<a href="javascript:void(0)" class="btn_yes btn_offer" (click)="onClickYes(offer)">Yes</a> <a href="javascript:void(0)" class="btn_no btn_offer" (click)="onClickNo(offer)">No</a>

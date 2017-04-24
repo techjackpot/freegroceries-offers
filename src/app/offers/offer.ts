@@ -1,3 +1,5 @@
+import { Cfield } from './cfield';
+
 export class Offer {
   _id?: string;
   name: string;
@@ -19,5 +21,7 @@ export class Offer {
   		val: number;
   	}
   };
+  cfields: Array<{cfield_id: string;use: boolean;}>;
+  new_cfields: Array<Cfield>;
   passed: boolean;
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { OffersService } from "./offers.service";
 import { Offer } from './offer';
+import { Cfield } from './cfield';
 
 @Component({
   selector: 'app-offers',
@@ -13,6 +14,7 @@ import { Offer } from './offer';
 export class OffersComponent implements OnInit {
 
 	offers: Offer[]
+	cfields: Cfield[]
 	isDataAvailable:boolean = false
 	passedOfferCount:number = 0
 	showNextButton:boolean = false
@@ -23,42 +25,61 @@ export class OffersComponent implements OnInit {
 	ngOnInit() {
 		let dob = 1900;
 		let gender = '';
+		let that = this;
 		this.activatedRoute.queryParams.subscribe((params: Params) => {
 			if(params['custom list selection']) dob = params['custom list selection'];
 			if(params['custom gender']) gender = params['custom gender'];
 			this.queryParams = Object.assign({}, params);
 		});
-		this.offersService.getOffers()
-		.then((offers: Offer[]) => {
-			this.offers = offers.filter((offer) => {
-				offer.passed = false;
-				if(offer.checks.check_age.use) {
-					if(offer.checks.check_age.cond=='greater') {
-						if(offer.checks.check_age.val > (new Date().getFullYear() - dob)) {
-							return false;
-						}
-					}
-					if(offer.checks.check_age.cond=='less') {
-						if(offer.checks.check_age.val < (new Date().getFullYear() - dob)) {
-							return false;
-						}
-					}
-				}
-				if(offer.checks.check_gender1.use) {
-					if(offer.checks.check_gender1.cond.toUpperCase() != gender.toUpperCase()) {
-						return false;
-					}
-				}
-				if(offer.checks.check_gender2.use) {
-					if(offer.checks.check_gender2.cond.toUpperCase() != gender.toUpperCase()) {
-						return false;
-					}
-				}
-				return offer;
+		this.offersService.getCfields()
+			.then((cfields) => {
+				this.cfields = cfields.filter((cfield) => {
+					cfield.selectedValue = '';
+					return cfield;
+				});
 			});
-			if(this.offers.length > 0) 
-				this.isDataAvailable = true;
-		});
+		this.offersService.getOffers()
+			.then((offers: Offer[]) => {
+				this.offers = offers.filter((offer) => {
+					offer.passed = false;
+					if(offer.checks.check_age.use) {
+						if(offer.checks.check_age.cond=='greater') {
+							if(offer.checks.check_age.val > (new Date().getFullYear() - dob)) {
+								return false;
+							}
+						}
+						if(offer.checks.check_age.cond=='less') {
+							if(offer.checks.check_age.val < (new Date().getFullYear() - dob)) {
+								return false;
+							}
+						}
+					}
+					if(offer.checks.check_gender1.use) {
+						if(offer.checks.check_gender1.cond.toUpperCase() != gender.toUpperCase()) {
+							return false;
+						}
+					}
+					if(offer.checks.check_gender2.use) {
+						if(offer.checks.check_gender2.cond.toUpperCase() != gender.toUpperCase()) {
+							return false;
+						}
+					}
+					let new_cfields = [];
+					for(let ckey in offer.cfields) {
+						let cfield = offer.cfields[ckey];
+						if(!cfield.use) continue;
+						for(let key in that.cfields) {
+							if(that.cfields[key]._id == cfield.cfield_id) {
+								new_cfields.push(Object.assign({selectedValue:''},that.cfields[key]));
+							}
+						}
+					};
+					offer.new_cfields = new_cfields;
+					return offer;
+				});
+				if(this.offers.length > 0) 
+					this.isDataAvailable = true;
+			});
 	}
 
 	checkNextButton() {
@@ -68,6 +89,10 @@ export class OffersComponent implements OnInit {
 			window.localStorage.setItem('fname',firstName);
 			this.showNextButton = true;
 		}
+	}
+
+	onClickLog (offer: Offer) {
+		console.log(offer);
 	}
 
 	onClickNo (offer: Offer) {
@@ -96,7 +121,25 @@ export class OffersComponent implements OnInit {
         	sid: this.getParameterByName('sid', offer.url),
         	campid: this.getParameterByName('campid', offer.url),
         	dob: dob
+        };
+        if(offer.new_cfields.length>0) {
+        	for(let key in offer.new_cfields) {
+        		let cfield = offer.new_cfields[key];
+        		if(cfield.type=='checkbox') {
+        			let checks = document.querySelectorAll("input[name='"+cfield.key+"[]']:checked");
+        			if(!checks.length) continue;
+        			let checks_vals = [];
+        			for(let i=0; i<checks.length; i++) {
+        				checks_vals.push(checks[i]['value']);
+        			}
+        			data[cfield.key] = checks_vals.join(',');
+        		} else {
+        			if(!cfield.selectedValue) continue;
+        			data[cfield.key] = cfield.selectedValue;
+        		}
+        	}
         }
+
         /*let data = {
         	firstname: firstName,
         	lastname: lastName,
