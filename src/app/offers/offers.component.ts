@@ -37,48 +37,48 @@ export class OffersComponent implements OnInit {
 					cfield.selectedValue = '';
 					return cfield;
 				});
-			});
-		this.offersService.getOffers()
-			.then((offers: Offer[]) => {
-				this.offers = offers.filter((offer) => {
-					offer.passed = false;
-					if(offer.checks.check_age.use) {
-						if(offer.checks.check_age.cond=='greater') {
-							if(offer.checks.check_age.val > (new Date().getFullYear() - dob)) {
-								return false;
+				this.offersService.getOffers()
+					.then((offers: Offer[]) => {
+						this.offers = offers.filter((offer) => {
+							offer.passed = false;
+							if(offer.checks.check_age.use) {
+								if(offer.checks.check_age.cond=='greater') {
+									if(offer.checks.check_age.val > (new Date().getFullYear() - dob)) {
+										return false;
+									}
+								}
+								if(offer.checks.check_age.cond=='less') {
+									if(offer.checks.check_age.val < (new Date().getFullYear() - dob)) {
+										return false;
+									}
+								}
 							}
-						}
-						if(offer.checks.check_age.cond=='less') {
-							if(offer.checks.check_age.val < (new Date().getFullYear() - dob)) {
-								return false;
+							if(offer.checks.check_gender1.use) {
+								if(offer.checks.check_gender1.cond.toUpperCase() != gender.toUpperCase()) {
+									return false;
+								}
 							}
-						}
-					}
-					if(offer.checks.check_gender1.use) {
-						if(offer.checks.check_gender1.cond.toUpperCase() != gender.toUpperCase()) {
-							return false;
-						}
-					}
-					if(offer.checks.check_gender2.use) {
-						if(offer.checks.check_gender2.cond.toUpperCase() != gender.toUpperCase()) {
-							return false;
-						}
-					}
-					let new_cfields = [];
-					for(let ckey in offer.cfields) {
-						let cfield = offer.cfields[ckey];
-						if(!cfield.use) continue;
-						for(let key in that.cfields) {
-							if(that.cfields[key]._id == cfield.cfield_id) {
-								new_cfields.push(Object.assign({selectedValue:''},that.cfields[key]));
+							if(offer.checks.check_gender2.use) {
+								if(offer.checks.check_gender2.cond.toUpperCase() != gender.toUpperCase()) {
+									return false;
+								}
 							}
-						}
-					};
-					offer.new_cfields = new_cfields;
-					return offer;
-				});
-				if(this.offers.length > 0) 
-					this.isDataAvailable = true;
+							let new_cfields = [];
+							for(let ckey in offer.cfields) {
+								let cfield = offer.cfields[ckey];
+								if(!cfield.use) continue;
+								for(let key in that.cfields) {
+									if(that.cfields[key]._id == cfield.cfield_id) {
+										new_cfields.push(Object.assign({selectedValue:''},that.cfields[key]));
+									}
+								}
+							};
+							offer.new_cfields = new_cfields;
+							return offer;
+						});
+						if(this.offers.length > 0) 
+							this.isDataAvailable = true;
+					});
 			});
 	}
 
