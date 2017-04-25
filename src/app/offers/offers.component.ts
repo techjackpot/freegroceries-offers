@@ -41,6 +41,8 @@ export class OffersComponent implements OnInit {
 					.then((offers: Offer[]) => {
 						this.offers = offers.filter((offer) => {
 							offer.passed = false;
+							offer.enabled = false;
+							if(!offer.preqst.primaryValue) offer.enabled = true;
 							if(offer.checks.check_age.use) {
 								if(offer.checks.check_age.cond=='greater') {
 									if(offer.checks.check_age.val > (new Date().getFullYear() - dob)) {

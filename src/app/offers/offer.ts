@@ -21,7 +21,20 @@ export class Offer {
   		val: number;
   	}
   };
+  preqst: {
+    type: string;
+    key: string;
+    description: string;
+    primaryValue: string;
+    selectedValue: string;
+    values: [
+      {
+        value: string;
+      }
+    ]
+  };
   cfields: Array<{cfield_id: string;use: boolean;}>;
   new_cfields: Array<Cfield>;
   passed: boolean;
+  enabled: boolean;
 }
