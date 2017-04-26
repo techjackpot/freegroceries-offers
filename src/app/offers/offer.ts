@@ -30,6 +30,7 @@ export class Offer {
     values: [
       {
         value: string;
+        label: string;
       }
     ]
   };

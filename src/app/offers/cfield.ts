@@ -8,6 +8,7 @@ export class Cfield {
 	values: [
 		{
 			value: string;
+			label: string;
 		}
 	]
 }

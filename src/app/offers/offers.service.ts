@@ -44,7 +44,7 @@ export class OffersService {
     sendFormPHP(data: Object): any {
   		var $http = new XMLHttpRequest();
   		var $url = "http://54.186.127.51:8080/postform.php";
-  		var $params = this.jsonToQueryString(data);//"lorem=ipsum&name=binny";
+  		var $params = this.jsonToQueryString(data);
   		$http.open("POST", $url, false);
 
   		$http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

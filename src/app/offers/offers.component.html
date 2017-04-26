@@ -14,7 +14,7 @@
 </div>
 <div class="container offers-list">
 	<div class="row" *ngIf="isDataAvailable">
-		<div *ngFor="let offer of offers" class="col-lg-12 offer-item" [hidden]="offer.passed">
+		<div *ngFor="let offer of offers; let i= index" class="col-lg-12 offer-item" [hidden]="offer.passed">
 			<div *ngIf="offer.enabled">
 				<div class="col-lg-3 text-center offer-image">
 					<img src={{offer.img_url}} />
@@ -23,27 +23,27 @@
 					{{offer.description}}
 					<div *ngIf="offer.new_cfields.length>0">
 						<hr />
-						<div *ngFor="let cfield of offer.new_cfields; let i = index;" class="panel panel-info">
+						<div *ngFor="let cfield of offer.new_cfields" class="panel panel-info">
 							<div class="panel-heading">
 								{{i+1}}. {{cfield.description}}
 							</div>
 							<div class="panel-body">
 								<div *ngIf="cfield.type=='radio'" class="radio">
 						            <label *ngFor="let val of cfield.values" class="radio-inline">
-										<input type="radio" [(ngModel)]="cfield.selectedValue" [value]="val.value" />
-										{{val.value}}
+										<input type="radio" name="offer{{i}}-cfields-cfield-value[]" [(ngModel)]="cfield.selectedValue" [value]="val.value" />
+										{{val.label}}
 						            </label>
 								</div>
 								<div *ngIf="cfield.type=='checkbox'" class="checkbox">
 									<label *ngFor="let val of cfield.values" class="checkbox-inline">
-										<input type="checkbox" name="{{cfield.key}}[]" [value]="val.value" />
-										{{val.value}}
+										<input type="checkbox" name="offer{{i}}-cfields-cfield-value[]" name="{{cfield.key}}[]" [value]="val.value" />
+										{{val.label}}
 									</label>
 								</div>
 								<div *ngIf="cfield.type=='select'">
 									<select class="form-control" [(ngModel)]="cfield.selectedValue">
 										<option></option>
-										<option *ngFor="let val of cfield.values" [value]="val.value">{{val.value}}</option>
+										<option *ngFor="let val of cfield.values" [value]="val.value">{{val.label}}</option>
 									</select>
 								</div>
 							</div>
@@ -63,13 +63,13 @@
 						<div *ngIf="offer.preqst.type=='radio'" class="radio">
 							<label *ngFor="let val of offer.preqst.values" class="radio-inline">
 								<input type="radio" [(ngModel)]="offer.preqst.selectedValue" [value]="val.value" />
-								{{val.value}}
+								{{val.label}}
 							</label>
 						</div>
 						<div *ngIf="offer.preqst.type=='select'">
 							<select class="form-control" [(ngModel)]="offer.preqst.selectedValue">
 								<option></option>
-								<option *ngFor="let val of offer.preqst.values" [value]="val.value">{{val.value}}</option>
+								<option *ngFor="let val of offer.preqst.values" [value]="val.value">{{val.label}}</option>
 							</select>
 						</div>
 					</div>
