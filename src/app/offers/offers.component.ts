@@ -103,6 +103,14 @@ export class OffersComponent implements OnInit {
 		this.checkNextButton();
 	}
 
+	onClickConfirm (offer: Offer) {
+		if(offer.preqst.selectedValue == offer.preqst.primaryValue) {
+			offer.enabled = true;
+		} else {
+			this.onClickNo(offer);
+		}
+	}
+
 	onClickYes (offer: Offer) {
         let fullName = this.queryParams['name'];
         let firstName = fullName.split(' ').slice(0, -1).join(' ');
@@ -140,6 +148,9 @@ export class OffersComponent implements OnInit {
         			data[cfield.key] = cfield.selectedValue;
         		}
         	}
+        }
+        if(offer.enabled == true && offer.preqst.type!='') {
+        	data[offer.preqst.key] = offer.preqst.primaryValue;
         }
 
         /*let data = {

@@ -107,3 +107,10 @@ a.btn_yes:hover {
 	background: #3a3;
 	color: #ddd;
 }
+
+.panel-footer .btn_offer {
+	margin: 0 8px;
+	display: inline-block;
+	text-transform: none;
+
+}

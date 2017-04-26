@@ -50,12 +50,34 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-lg-2 text-center offer-action">
+					<a href="javascript:void(0)" class="btn_yes btn_offer" (click)="onClickYes(offer)">Yes</a> <a href="javascript:void(0)" class="btn_no btn_offer" (click)="onClickNo(offer)">No</a>
+				</div>
 			</div>
 			<div *ngIf="!offer.enabled">
-			fdsafds
-			</div>
-			<div class="col-lg-2 text-center offer-action">
-				<a href="javascript:void(0)" class="btn_yes btn_offer" (click)="onClickYes(offer)">Yes</a> <a href="javascript:void(0)" class="btn_no btn_offer" (click)="onClickNo(offer)">No</a>
+				<div class="panel panel-danger">
+					<div class="panel-heading">
+						{{offer.preqst.description}}
+					</div>
+					<div class="panel-body">
+						<div *ngIf="offer.preqst.type=='radio'" class="radio">
+							<label *ngFor="let val of offer.preqst.values" class="radio-inline">
+								<input type="radio" [(ngModel)]="offer.preqst.selectedValue" [value]="val.value" />
+								{{val.value}}
+							</label>
+						</div>
+						<div *ngIf="offer.preqst.type=='select'">
+							<select class="form-control" [(ngModel)]="offer.preqst.selectedValue">
+								<option></option>
+								<option *ngFor="let val of offer.preqst.values" [value]="val.value">{{val.value}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<a href="javascript:void(0)" class="btn_confirm btn_offer" (click)="onClickConfirm(offer)">Confirm</a>
+						<a href="javascript:void(0)" class="btn_dismiss btn_offer" (click)="onClickNo(offer)">Dismiss</a>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div *ngIf="showNextButton" class="next-area col-lg-12 text-center"><a class="btn_next btn_offer" href="/success">Next</a></div>
