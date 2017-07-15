@@ -44,13 +44,23 @@ export class OffersComponent implements OnInit {
 							offer.enabled = false;
 							if(!offer.preqst.primaryValue) offer.enabled = true;
 							if(offer.checks.check_age.use) {
-								if(offer.checks.check_age.cond=='greater') {
+								/*if(offer.checks.check_age.cond=='greater') {
 									if(offer.checks.check_age.val > (new Date().getFullYear() - dob)) {
 										return false;
 									}
 								}
 								if(offer.checks.check_age.cond=='less') {
 									if(offer.checks.check_age.val < (new Date().getFullYear() - dob)) {
+										return false;
+									}
+								}*/
+								if(offer.checks.check_age.low != null) {
+									if(offer.checks.check_age.low > (new Date().getFullYear() - dob)) {
+										return false;
+									}
+								}
+								if(offer.checks.check_age.high != null) {
+									if(offer.checks.check_age.high < (new Date().getFullYear() - dob)) {
 										return false;
 									}
 								}
@@ -71,11 +81,16 @@ export class OffersComponent implements OnInit {
 								if(!cfield.use) continue;
 								for(let key in that.cfields) {
 									if(that.cfields[key]._id == cfield.cfield_id) {
+										if(that.cfields[key].type=='hidden') {
+											that.cfields[key].selectedValue = that.cfields[key].defaultValue;
+										}
 										new_cfields.push(Object.assign({selectedValue:''},that.cfields[key]));
 									}
 								}
 							};
 							offer.new_cfields = new_cfields;
+
+							console.log(offer);
 							return offer;
 						});
 						if(this.offers.length > 0) 
@@ -113,24 +128,26 @@ export class OffersComponent implements OnInit {
 
 	onClickYes (offer: Offer) {
         let fullName = this.queryParams['name'];
-        let firstName = fullName.split(' ').slice(0, -1).join(' ');
-		let lastName = fullName.split(' ').slice(-1).join(' ');
+        let firstName = this.queryParams['name (awf_first)'] || fullName.split(' ').slice(0, -1).join(' ');
+		let lastName = this.queryParams['name (awf_last)'] || fullName.split(' ').slice(-1).join(' ');
 		let dob = '01/01/' + this.queryParams['custom list selection'];
         let data = {
-        	fname: firstName,
-        	lname: lastName,
-        	email: this.queryParams['email'],
-        	mobile: this.queryParams['custom telephone number'],
-        	streetaddress: this.queryParams['custom street address'],
-        	citysuburb: this.queryParams['custom city or suburb'],
-        	state: this.queryParams['custom state'],
-        	postcode: this.queryParams['custom postcode'],
-        	birth_year: this.queryParams['custom list selection'],
-        	gender: this.queryParams['custom gender'],
+        	First: firstName,
+        	Last: lastName,
+        	Email: this.queryParams['email'],
+        	Mobile: this.queryParams['custom telephone number'],
+        	DayPhone: this.queryParams['custom telephone number'],
+        	Address1: this.queryParams['custom street address'],
+        	Address2: '',
+        	City: this.queryParams['custom city or suburb'],
+        	State: this.queryParams['custom state'],
+        	Postcode: this.queryParams['custom postcode'],
+        	// birth_year: this.queryParams['custom list selection'],
+        	// gender: this.queryParams['custom gender'],
         	offerurl: offer.url,
-        	sid: this.getParameterByName('sid', offer.url),
-        	campid: this.getParameterByName('campid', offer.url),
-        	dob: dob
+        	// sid: this.getParameterByName('sid', offer.url),
+        	// campid: this.getParameterByName('campid', offer.url),
+        	Dob: dob
         };
         if(offer.new_cfields.length>0) {
         	for(let key in offer.new_cfields) {

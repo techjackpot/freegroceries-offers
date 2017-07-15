@@ -17,8 +17,8 @@ export class Offer {
   	},
   	check_age: {
   		use: boolean;
-  		cond: string;
-  		val: number;
+      low: number;
+      high: number;
   	}
   };
   preqst: {

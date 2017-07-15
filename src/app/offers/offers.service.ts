@@ -7,8 +7,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class OffersService {
 
-    private apiUrl = 'http://54.213.65.242/api/';
-    //private apiUrl = 'http://localhost:8080/api/';
+    //private apiUrl = 'http://54.213.65.242/api/';
+    private apiUrl = 'http://localhost:8080/api/';
 
     constructor (private http: Http) {}
 
@@ -43,14 +43,16 @@ export class OffersService {
 	  }
     sendFormPHP(data: Object): any {
   		var $http = new XMLHttpRequest();
-  		var $url = "http://54.186.127.51:8080/postform.php";
+  		//var $url = "http://54.186.127.51:8080/postform.php";
+      var $url = "http://localhost/postform.php";
   		var $params = this.jsonToQueryString(data);
   		$http.open("POST", $url, false);
 
   		$http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
   		$http.send($params);
-  		return JSON.parse($http.responseText);
+      return $http.responseText;
+  		//return JSON.parse($http.responseText);
     }
 
     private handleError (error: any) {

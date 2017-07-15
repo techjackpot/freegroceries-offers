@@ -5,6 +5,7 @@ export class Cfield {
 	type: string;
 	key: string;
 	selectedValue: string;
+	defaultValue: string;
 	values: [
 		{
 			value: string;
