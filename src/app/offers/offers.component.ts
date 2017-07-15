@@ -90,7 +90,6 @@ export class OffersComponent implements OnInit {
 							};
 							offer.new_cfields = new_cfields;
 
-							console.log(offer);
 							return offer;
 						});
 						if(this.offers.length > 0) 
@@ -127,28 +126,22 @@ export class OffersComponent implements OnInit {
 	}
 
 	onClickYes (offer: Offer) {
-        let fullName = this.queryParams['name'];
-        let firstName = this.queryParams['name (awf_first)'] || fullName.split(' ').slice(0, -1).join(' ');
-		let lastName = this.queryParams['name (awf_last)'] || fullName.split(' ').slice(-1).join(' ');
-		let dob = '01/01/' + this.queryParams['custom list selection'];
+				let queryData = this.queryParams;
+
+        let fullName = queryData['name'];
+        queryData['name_first'] = queryData['name (awf_first)'] || fullName.split(' ').slice(0, -1).join(' ');
+				queryData['naem_last'] = queryData['name (awf_last)'] || fullName.split(' ').slice(-1).join(' ');
+				queryData['dob'] = '01/01/' + queryData['custom list selection'];
+
         let data = {
-        	First: firstName,
-        	Last: lastName,
-        	Email: this.queryParams['email'],
-        	Mobile: this.queryParams['custom telephone number'],
-        	DayPhone: this.queryParams['custom telephone number'],
-        	Address1: this.queryParams['custom street address'],
-        	Address2: '',
-        	City: this.queryParams['custom city or suburb'],
-        	State: this.queryParams['custom state'],
-        	Postcode: this.queryParams['custom postcode'],
-        	// birth_year: this.queryParams['custom list selection'],
-        	// gender: this.queryParams['custom gender'],
         	offerurl: offer.url,
-        	// sid: this.getParameterByName('sid', offer.url),
-        	// campid: this.getParameterByName('campid', offer.url),
-        	Dob: dob
         };
+        if(offer.presets.length>0) {
+        	offer.presets.forEach((preset) => {
+        		if(!preset.source || !preset.target) return;
+        		data[preset.target] = queryData[preset.source];
+        	})
+        }
         if(offer.new_cfields.length>0) {
         	for(let key in offer.new_cfields) {
         		let cfield = offer.new_cfields[key];
@@ -170,7 +163,28 @@ export class OffersComponent implements OnInit {
         	data[offer.preqst.key] = offer.preqst.primaryValue;
         }
 
-        /*let data = {
+        /* // integrate
+				let data = {
+        	First: firstName,
+        	Last: lastName,
+        	Email: this.queryParams['email'],
+        	Mobile: this.queryParams['custom telephone number'],
+        	DayPhone: this.queryParams['custom telephone number'],
+        	Address1: this.queryParams['custom street address'],
+        	Address2: '',
+        	City: this.queryParams['custom city or suburb'],
+        	State: this.queryParams['custom state'],
+        	Postcode: this.queryParams['custom postcode'],
+        	// birth_year: this.queryParams['custom list selection'],
+        	// gender: this.queryParams['custom gender'],
+        	offerurl: offer.url,
+        	// sid: this.getParameterByName('sid', offer.url),
+        	// campid: this.getParameterByName('campid', offer.url),
+        	Dob: dob
+        };
+        */
+        /* // leadbyte
+        let data = {
         	firstname: firstName,
         	lastname: lastName,
         	email: this.queryParams['email'],
@@ -192,7 +206,8 @@ export class OffersComponent implements OnInit {
         	campid: this.getParameterByName('campid', offer.url),
         	ipaddress: '54.186.127.51',
         	source: 'http://www.freegroceries.com.au'
-        };*/
+        };
+        */
         let response = this.offersService.sendFormPHP(data);
         if(response) {
         	console.log(response);

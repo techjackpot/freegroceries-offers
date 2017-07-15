@@ -53,7 +53,7 @@ if(isset($urlinfo['query'])) {
 	parse_str($urlinfo['query'], $queries);
 	$post_data = array_merge($post_data, $queries);
 }
-//var_dump($post_data);
+var_dump($post_data);
 
 $offerurl = $urlinfo['scheme'].'://'.$urlinfo['host'].(isset($urlinfo['path'])?$urlinfo['path']:'/').'?'.http_build_query($post_data);
 

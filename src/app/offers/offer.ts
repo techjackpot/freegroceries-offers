@@ -34,6 +34,12 @@ export class Offer {
       }
     ]
   };
+  presets: Array<
+    {
+      source: string;
+      target: string;
+    }
+  >;
   cfields: Array<{cfield_id: string;use: boolean;}>;
   new_cfields: Array<Cfield>;
   passed: boolean;
