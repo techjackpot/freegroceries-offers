@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 @font-face {
     font-family: 'MagallanesCondBlack-webfont';
     src: url('./assets/fonts/MagallanesCondBlack-webfont.eot');
@@ -101,8 +100,10 @@ form,fieldset{margin:0;padding:0;border-style:none}
 #visual .text-f{display:table;width:100%;height:100%}
 #visual .text{display:table-cell;vertical-align:middle;width:100%;height:100%;text-align:center}
 #visual .text h2{margin:0 0 12px;color:#034a22;position:relative;z-index:1;font:40px/50px 'MagallanesCondBlack-webfont',Arial,sans-serif}
-#visual .text h3{position:relative;z-index:1;background:url(./assets/images/bg-ar.png) no-repeat 100% 50%;margin:0 -45px 10px -9999px;text-align:right;padding:30px 59px 30px 9999px;color:#034a22;font:21px/25px 'MagallanesCondBold-italic-webfont',Arial,sans-serif}
+#visual .text h3{position:relative;z-index:1;background:url(./assets/images/bg-ar.png) no-repeat 100% 20%;margin:0 -45px 10px -9999px;text-align:right;padding:30px 59px 30px 9999px;color:#034a22;font:21px/25px 'MagallanesCondBold-italic-webfont',Arial,sans-serif}
 #visual .gmask ul li .text img{max-width:100%;display:block;height:auto;position:relative;z-index:1;margin:0 0 35px;width:auto}
+#visual .text h4{position:relative;z-index:1; color:#034a22;font:14px/16px 'MagallanesCondBold-italic-webfont',Arial,sans-serif}
+
 
 /* Banner */
 #banner {position: relative;background: transparent no-repeat center center; -moz-background-size: cover; -o-background-size: cover; background-size: cover; min-height: 436px; padding: 35px 0 50px; text-align: center; color: #fff; }
@@ -134,7 +135,7 @@ form,fieldset{margin:0;padding:0;border-style:none}
 #promo h2{font:30px/45px 'MagallanesCondExtraBold-webfont',Arial,sans-serif;margin:0}
 #promo .right p{margin:0 0 16px}
 
-.section{padding:20px 0;max-width:946px;margin-right: -100px; overflow:hidden;text-align:center}
+.section{padding:20px 0;max-width:none;margin-right: 0px;overflow:hidden;text-align:center}
 .section h2{color:#034a22;margin:0;font:30px/36px 'MagallanesCondBlack-webfont',Arial,sans-serif}
 .section .list{margin:0;padding:95px 0 67px;list-style:none;overflow:hidden}
 .section .list li{display:inline-block;width:31%;margin:0 1%;vertical-align:top;overflow:hidden}
@@ -259,8 +260,8 @@ form,fieldset{margin:0;padding:0;border-style:none}
     #visual .text-h{margin:0 0 0 -244px}
     #header .logo{float:none;display:block;margin:0 auto}
     .visual-section .h,#footer .footer-holder,#content,#promo .h,.section{padding-left:20px;padding-right:20px}
-    .section .list li{width:30%}
-    body{-webkit-text-size-adjust:100%;-ms-text-size-adjust:none}
+    .section .list li{width:50%}
+    body{-webkit-text-size-adjust:50%;-ms-text-size-adjust:none}
     input[type=text],input[type=password],input[type=file],input[type=submit],textarea{-webkit-appearance:none}
 }
 
@@ -451,8 +452,14 @@ form,fieldset{margin:0;padding:0;border-style:none}
 .header_banner h1 {
   font-size: 35px;
 }
-.AW-Form-81415869 {
+
+ h5 {
+  font-size: 15px;
+  color: black !important;
+}
+.AW-Form-896400247 {
   position: static;
+
 }
 
 }
@@ -460,34 +467,34 @@ form,fieldset{margin:0;padding:0;border-style:none}
 
 @media only screen  and (min-width: 320px)  and (max-width: 1024px) {
 
-.AW-Form-81415869 {
-  padding: 10px 0px !important;
+.AW-Form-896400247 {
+  padding: 2px 0px !important;
   position: static !important;
   width: 100% !important;
 }
 
 .form-wrap form {
-  margin: 0 10px !important;
+  margin: 0 2px !important;
 }
 
 }
 
 
 
-.AW-Form-81415869 {
+.AW-Form-896400247 {
   background: #0b7f3e none repeat scroll 0 0;
   box-shadow: -1px 2px 1px 1px rgba(0, 0, 0, 0.2);
-  margin: 0 -473px 0 0;
-  padding: 29px 48px;
+  margin: 0 -373px 0 0;
+  padding: 4px 4px;
   position: absolute;
   right: 30%;
-  top: 58px;
+  top: 50px;
   width: 538px;
 }
 .af-header {
   display: none;
 }
-#af-form-81415869 {
+#af-form-896400247 {
   background-color: transparent !important;
   border-color: transparent !important;
 }
@@ -497,20 +504,62 @@ form,fieldset{margin:0;padding:0;border-style:none}
   border: medium none !important;
   box-sizing: border-box !important;
   color: #fff !important;
-  font: 14px/26px Arial,sans-serif !important;
-  height: 46px !important;
+  font: 12px/12px Arial,sans-serif !important;
+  height: 27px !important;
   margin: 0 !important;
-  padding: 10px 15px !important !important;
+  padding: 2px 2px !important !important;
   width: 100% !important;
 }
 .af-element label {
   color: #fff !important;
   font-family: open sans !important;
-  font-size: 14px !important;
+  font-size: 12px !important;
   font-weight: bold !important;
+  line-height: 27px;
 }
+
+.af-selectWrap select-area {
+ line-height: 14px;
+ height: 14px;
+}
+
+
+
+.select-area {
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    float: left;
+    border: none;
+    background: #2b9057;
+    width: 100% !important;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    height: 27px;
+    font: 14px/26px Arial,sans-serif;
+}
+
+.select-area .select-opener {
+    background: url(./assets/images/bg-select.gif) no-repeat;
+    cursor: pointer;
+    position: absolute;
+    height: 27px;
+    width: 29px;
+    right: 0;
+    top: 0;
+}
+
+
 .select-area .center {
+  font: 12px Arial,sans-serif !important;
   color: #fff !important;
+  font-size: 12px !important;
+  height: 12px !important;
+  padding: 2px 2px !important !important;
+  margin: 0 !important;
+  width: 50px !important;
 }
 .af-body.af-standards .af-element:nth-child(1) {
   float: left;
@@ -540,23 +589,23 @@ form,fieldset{margin:0;padding:0;border-style:none}
   width: 50%;
 }
 
-#af-form-81415869 .buttonContainer input.submit {
+#af-form-896400247 .buttonContainer input.submit {
   background: #de2d39 none repeat scroll 0 0 !important;
   border-bottom: 4px solid #FFDF71 !important;
   border-left: 2px solid #FFDF71 !important;
-  border-radius: 5px !important;
-  font-size: 18px !important;
+  border-radius: 2px !important;
+  font-size: 12px !important;
   font-weight: bold !important;
-  line-height:45px !important;
+  line-height:20px !important;
   text-transform: uppercase !important;
   width: 100% !important;
-  margin-top: 10px;
+  margin-top: 2px;
   cursor: pointer;
 }
 
 .bodyText {
 
-    line-height: 15px;
+    line-height: 8px;
     color: white;
     
 }
@@ -575,10 +624,10 @@ a {color: white; text-decoration: underline; font-weight: bold;}
   font-size: 5px;
 }
 
-#af-form-81415869 .af-body {
+#af-form-896400247 .af-body {
   padding-top: 0 !important;
 }
-#af-form-81415869 .af-standards .af-element {
+#af-form-896400247 .af-standards .af-element {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
@@ -590,4 +639,57 @@ a {color: white; text-decoration: underline; font-weight: bold;}
 }
 .af-body.af-standards input {
   font-family: arial !important;
+}
+
+
+
+
+
+/**************NEW-MEDIA******************/
+
+
+
+
+@media only screen  and (min-width: 768px)  and (max-width: 1024px) {
+
+#header {
+  margin-bottom: 37px;
+}
+
+.visual-section h2 {
+  font-size: 22px;
+}
+
+}
+
+
+
+@media only screen  and (min-width: 320px)  and (max-width: 767px) {
+
+#visual .text h2 {
+  font-size: 21px;
+  line-height: 27px;
+}
+
+#header {
+  margin-bottom: 40px;
+}
+
+.section h2 {
+  font-size: 17px;
+}
+
+.visual-section h2 {
+  font-size: 11px;
+  padding: 7px;
+}
+
+.visual-section .h {
+  padding: 45px 0 35px;
+}
+
+.h h3 {
+  font-size: 17px;
+}
+
 }
