@@ -133,6 +133,16 @@ export class OffersComponent implements OnInit {
 				queryData['naem_last'] = queryData['name (awf_last)'] || fullName.split(' ').slice(-1).join(' ');
 				queryData['dob'] = '01/01/' + queryData['custom list selection'];
 
+				let gender = queryData['custom gender'];
+				if(gender == 'Male' || gender == 'M') {
+					queryData['gender_long'] = 'Male';
+					queryData['gender_short'] = 'M';
+				}
+				if(gender == 'Female' || gender == 'F') {
+					queryData['gender_long'] = 'Female';
+					queryData['gender_short'] = 'F';
+				}
+
         let data = {
         	offerurl: offer.url,
         };
