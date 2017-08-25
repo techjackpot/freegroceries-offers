@@ -70,21 +70,27 @@
 					<div class="panel-body">
 						<div *ngIf="offer.preqst.type=='radio'" class="radio">
 							<label *ngFor="let val of offer.preqst.values" class="radio-inline">
-								<input type="radio" [(ngModel)]="offer.preqst.selectedValue" [value]="val.value" />
+								<input type="radio" [(ngModel)]="val.selected" [value]="val.value" (change)="onCheckPrimary(offer,val)" />
+								{{val.label}}
+							</label>
+						</div>
+						<div *ngIf="offer.preqst.type=='checkbox'" class="checkbox">
+							<label *ngFor="let val of offer.preqst.values" class="checkbox-inline">
+								<input type="checkbox" [(ngModel)]="val.selected" [value]="val.value" (change)="onCheckPrimary(offer,val)" />
 								{{val.label}}
 							</label>
 						</div>
 						<div *ngIf="offer.preqst.type=='select'">
-							<select class="form-control" [(ngModel)]="offer.preqst.selectedValue">
+							<select class="form-control" [(ngModel)]="offer.preqst.selectedValue" (change)="onCheckPrimary(offer,val)">
 								<option></option>
 								<option *ngFor="let val of offer.preqst.values" [value]="val.value">{{val.label}}</option>
 							</select>
 						</div>
-					</div>
+					</div><!-- 
 					<div class="panel-footer">
 						<a href="javascript:void(0)" class="btn_confirm btn_offer" (click)="onClickConfirm(offer)">Confirm</a>
 						<a href="javascript:void(0)" class="btn_dismiss btn_offer" (click)="onClickNo(offer)">Dismiss</a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

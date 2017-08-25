@@ -25,12 +25,14 @@ export class Offer {
     type: string;
     key: string;
     description: string;
-    primaryValue: string;
+    // primaryValue: string;
     selectedValue: string;
     values: [
       {
         value: string;
         label: string;
+        primary: boolean;
+        selected: any;
       }
     ]
   };

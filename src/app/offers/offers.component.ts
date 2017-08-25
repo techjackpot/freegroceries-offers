@@ -40,9 +40,10 @@ export class OffersComponent implements OnInit {
 				this.offersService.getOffers()
 					.then((offers: Offer[]) => {
 						this.offers = offers.filter((offer) => {
+							if(!offer.preqst.description) return false;
 							offer.passed = false;
 							offer.enabled = false;
-							if(!offer.preqst.primaryValue) offer.enabled = true;
+							// if(!offer.preqst.primaryValue) offer.enabled = true;
 							if(offer.checks.check_age.use) {
 								/*if(offer.checks.check_age.cond=='greater') {
 									if(offer.checks.check_age.val > (new Date().getFullYear() - dob)) {
@@ -90,8 +91,22 @@ export class OffersComponent implements OnInit {
 							};
 							offer.new_cfields = new_cfields;
 
+							// if(offer.preqst.type=='select') {
+							// 	for(var i=0;i<offer.preqst.values.length;i++) {
+							// 		offer.preqst.values[i]['selected'] = '';
+							// 	}
+							// 	// let values = [];
+							// 	// offer.preqst.values.forEach((el) => {
+							// 	// 	values.push({...el, selected: ''});
+							// 	// });
+
+							// 	// offer.preqst.values = values;
+							// }
+							// console.log(offer);
+
 							return offer;
 						});
+						console.log(this.offers);
 						if(this.offers.length > 0) 
 							this.isDataAvailable = true;
 					});
@@ -117,12 +132,38 @@ export class OffersComponent implements OnInit {
 		this.checkNextButton();
 	}
 
-	onClickConfirm (offer: Offer) {
-		if(offer.preqst.selectedValue == offer.preqst.primaryValue) {
+	onCheckPrimary(offer: Offer, val) {
+		if(offer.preqst.type=='checkbox') {
+			if(val.primary != val.selected) {
+				this.onClickNo(offer);
+				return ;
+			}
+			if(offer.preqst.values.filter((el) => el.primary).every((el) => el.primary == el.selected)) {
+				offer.enabled = true;
+			}
+		} else if(offer.preqst.type=='radio'){
+			if(val.primary != (val.selected==val.value)) {
+				this.onClickNo(offer);
+				return ;
+			}
 			offer.enabled = true;
 		} else {
+			if(offer.preqst.values.filter((el) => el.primary).every((el) => el.value == offer.preqst.selectedValue)) {
+				offer.enabled = true;
+				return ;
+			}
 			this.onClickNo(offer);
+			return ;
 		}
+		console.log(val);
+	}
+
+	onClickConfirm (offer: Offer) {
+		// if(offer.preqst.selectedValue == offer.preqst.primaryValue) {
+		// 	offer.enabled = true;
+		// } else {
+		// 	this.onClickNo(offer);
+		// }
 	}
 
 	onClickYes (offer: Offer) {
@@ -170,7 +211,7 @@ export class OffersComponent implements OnInit {
         	}
         }
         if(offer.enabled == true && offer.preqst.type!='') {
-        	data[offer.preqst.key] = offer.preqst.primaryValue;
+        	data[offer.preqst.key] = offer.preqst.values.filter((el) => el.primary).map((el) => el.value).join(','); //offer.preqst.primaryValue;
         }
 
         /* // integrate

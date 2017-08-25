@@ -81,7 +81,7 @@
 }
 .offer-image img {
 	width: 100%;
-	max-width:220px;
+	max-width: 100px;
 }
 a.btn_offer {
 	text-transform: uppercase;

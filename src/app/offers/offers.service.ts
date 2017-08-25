@@ -3,12 +3,12 @@ import { Offer } from './offer';
 import { Cfield } from './cfield';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class OffersService {
 
-    //private apiUrl = 'http://54.213.65.242/api/';
-    private apiUrl = 'http://localhost:8080/api/';
+    private apiUrl = environment.serverUrl;
 
     constructor (private http: Http) {}
 
