@@ -25,7 +25,6 @@ export class Offer {
     type: string;
     key: string;
     description: string;
-    // primaryValue: string;
     selectedValue: string;
     values: [
       {

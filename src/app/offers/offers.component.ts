@@ -43,18 +43,8 @@ export class OffersComponent implements OnInit {
 							if(!offer.preqst.description) return false;
 							offer.passed = false;
 							offer.enabled = false;
-							// if(!offer.preqst.primaryValue) offer.enabled = true;
+							
 							if(offer.checks.check_age.use) {
-								/*if(offer.checks.check_age.cond=='greater') {
-									if(offer.checks.check_age.val > (new Date().getFullYear() - dob)) {
-										return false;
-									}
-								}
-								if(offer.checks.check_age.cond=='less') {
-									if(offer.checks.check_age.val < (new Date().getFullYear() - dob)) {
-										return false;
-									}
-								}*/
 								if(offer.checks.check_age.low != null) {
 									if(offer.checks.check_age.low > (new Date().getFullYear() - dob)) {
 										return false;
@@ -91,19 +81,6 @@ export class OffersComponent implements OnInit {
 							};
 							offer.new_cfields = new_cfields;
 
-							// if(offer.preqst.type=='select') {
-							// 	for(var i=0;i<offer.preqst.values.length;i++) {
-							// 		offer.preqst.values[i]['selected'] = '';
-							// 	}
-							// 	// let values = [];
-							// 	// offer.preqst.values.forEach((el) => {
-							// 	// 	values.push({...el, selected: ''});
-							// 	// });
-
-							// 	// offer.preqst.values = values;
-							// }
-							// console.log(offer);
-
 							return offer;
 						});
 						console.log(this.offers);
@@ -138,7 +115,7 @@ export class OffersComponent implements OnInit {
 				this.onClickNo(offer);
 				return ;
 			}
-			if(offer.preqst.values.filter((el) => el.primary).every((el) => el.primary == el.selected)) {
+			if(offer.preqst.values.filter((el) => el.primary).some((el) => el.primary == el.selected)) {
 				offer.enabled = true;
 			}
 		} else if(offer.preqst.type=='radio'){
@@ -156,14 +133,6 @@ export class OffersComponent implements OnInit {
 			return ;
 		}
 		console.log(val);
-	}
-
-	onClickConfirm (offer: Offer) {
-		// if(offer.preqst.selectedValue == offer.preqst.primaryValue) {
-		// 	offer.enabled = true;
-		// } else {
-		// 	this.onClickNo(offer);
-		// }
 	}
 
 	onClickYes (offer: Offer) {
@@ -214,51 +183,6 @@ export class OffersComponent implements OnInit {
         	data[offer.preqst.key] = offer.preqst.values.filter((el) => el.primary).map((el) => el.value).join(','); //offer.preqst.primaryValue;
         }
 
-        /* // integrate
-				let data = {
-        	First: firstName,
-        	Last: lastName,
-        	Email: this.queryParams['email'],
-        	Mobile: this.queryParams['custom telephone number'],
-        	DayPhone: this.queryParams['custom telephone number'],
-        	Address1: this.queryParams['custom street address'],
-        	Address2: '',
-        	City: this.queryParams['custom city or suburb'],
-        	State: this.queryParams['custom state'],
-        	Postcode: this.queryParams['custom postcode'],
-        	// birth_year: this.queryParams['custom list selection'],
-        	// gender: this.queryParams['custom gender'],
-        	offerurl: offer.url,
-        	// sid: this.getParameterByName('sid', offer.url),
-        	// campid: this.getParameterByName('campid', offer.url),
-        	Dob: dob
-        };
-        */
-        /* // leadbyte
-        let data = {
-        	firstname: firstName,
-        	lastname: lastName,
-        	email: this.queryParams['email'],
-        	mobile: this.queryParams['custom telephone number'],
-        	phone1: this.queryParams['custom telephone number'],
-        	phone: this.queryParams['custom telephone number'],
-        	street1: this.queryParams['custom street address'],
-        	streetaddress1: this.queryParams['custom street address'],
-        	citysuburb: this.queryParams['custom city or suburb'],
-        	towncity: this.queryParams['custom city or suburb'],
-        	state: this.queryParams['custom state'],
-        	county: this.queryParams['custom state'],
-        	postcode: this.queryParams['custom postcode'],
-        	birthyear: this.queryParams['custom list selection'],
-        	dob: dob,
-        	gender: this.queryParams['custom gender'],
-        	offerurl: offer.url,
-        	sid: this.getParameterByName('sid', offer.url),
-        	campid: this.getParameterByName('campid', offer.url),
-        	ipaddress: '54.186.127.51',
-        	source: 'http://www.freegroceries.com.au'
-        };
-        */
         let response = this.offersService.sendFormPHP(data);
         if(response) {
         	console.log(response);
