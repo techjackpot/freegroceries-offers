@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'http://localhost:8080/api/'
+  serverUrl: 'http://localhost:8080/api/',
+  formUrl: 'http://localhost/postform.php'
 };
