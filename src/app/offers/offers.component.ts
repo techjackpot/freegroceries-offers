@@ -40,9 +40,12 @@ export class OffersComponent implements OnInit {
 				this.offersService.getOffers()
 					.then((offers: Offer[]) => {
 						this.offers = offers.filter((offer) => {
-							if(!offer.preqst.description) return false;
+							if(!offer.preqst.description) {
+								offer.enabled = true;
+							} else {
+								offer.enabled = false;
+							}
 							offer.passed = false;
-							offer.enabled = false;
 							
 							if(offer.checks.check_age.use) {
 								if(offer.checks.check_age.low != null) {
