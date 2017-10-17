@@ -25,10 +25,14 @@ export class OffersComponent implements OnInit {
 	ngOnInit() {
 		let dob = 1900;
 		let gender = '';
+		let postcode = '';
+		let state = '';
 		let that = this;
 		this.activatedRoute.queryParams.subscribe((params: Params) => {
 			if(params['custom list selection']) dob = params['custom list selection'];
 			if(params['custom gender']) gender = params['custom gender'];
+			if(params['custom postcode']) postcode = params['custom postcode'];
+			if(params['custom state']) state = params['custom state'];
 			this.queryParams = Object.assign({}, params);
 		});
 		this.offersService.getCfields()
@@ -57,6 +61,16 @@ export class OffersComponent implements OnInit {
 									if(offer.checks.check_age.high < (new Date().getFullYear() - dob)) {
 										return false;
 									}
+								}
+							}
+							if(offer.checks.check_postcode.use) {
+								if(!offer.checks.check_postcode.postcodes.split(',').some((pc) => pc==postcode)) {
+									return false;
+								}
+							}
+							if(offer.checks.check_state.use) {
+								if(!offer.checks.check_state.states.split(',').some((ss) => ss==state)) {
+									return false;
 								}
 							}
 							if(offer.checks.check_gender1.use) {

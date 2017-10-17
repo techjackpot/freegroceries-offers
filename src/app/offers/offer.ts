@@ -19,7 +19,15 @@ export class Offer {
   		use: boolean;
       low: number;
       high: number;
-  	}
+  	},
+    check_postcode: {
+      use: boolean;
+      postcodes: string;
+    },
+    check_state: {
+      use: boolean;
+      states: string;
+    }
   };
   preqst: {
     type: string;
